@@ -17,8 +17,7 @@ export const Title = styled.h1`
 
 export const Subtitle = styled.h2`
   font-size: 2.5rem;
-  font-family: 'Inconsolata', serif;
-  letter-spacing: 0.25rem;
+  font-family: 'Inconsolata', monospace;
   color: ${(p) => p.theme.yellow};
   margin: 0;
   line-height: inherit;
