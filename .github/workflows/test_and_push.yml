@@ -1,0 +1,36 @@
+name: "Test and Push"
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          run_install: true
+          version: 6.4.0
+      - name: Run tests
+        run: pnpm test
+
+  push:
+    name: Push to main branch
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          run_install: true
+          version: 6.4.0
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: main
