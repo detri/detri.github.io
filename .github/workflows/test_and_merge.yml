@@ -4,7 +4,7 @@ on:
     branches:
       - develop
 jobs:
-  test_and_push:
+  test_and_merge:
     name: Test and push to main
     runs-on: ubuntu-latest
     steps:
@@ -21,4 +21,10 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge develop into main
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
